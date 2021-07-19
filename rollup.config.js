@@ -2,6 +2,7 @@ import svelte from 'rollup-plugin-svelte'
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import css from 'rollup-plugin-css-only'
+import svg from 'rollup-plugin-svg'
 
 export default {
 	input: 'src/index.js',
@@ -17,6 +18,7 @@ export default {
 		}),
 		resolve(),
 		commonjs(),
-		css({ output: 'public/styles.css' })
+		css({ output: 'public/styles.css' }),
+		svg(),
 	],
 }
