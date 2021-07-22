@@ -4,8 +4,10 @@
 	import router from './router.js'
 	import Textarea from './textarea.svelte'
 	import Journal from './journal.svelte'
+	import Icon from './icon/icon.svelte'
 
 	let journal
+	let disabled = false
 
 	onMount(() => {
 		// if entry is empty on mount, reset the date
@@ -20,6 +22,7 @@
 	})
 
 	async function handleSubmit(event) {
+		disabled = true
 		const form = event.target
 		const method = form.method
 		const action = form.action
@@ -36,6 +39,7 @@
 			$date = new Date().toISOString().substring(0, 10)
 			router.redirect('/editall')
 		} else {
+			disabled = false
 			console.log(response)
 		}
 	}
@@ -63,7 +67,27 @@
 </script>
 
 <style>
-
+	form {
+		margin-bottom: var(--spacing-default);
+	}
+	button {
+		float: right;
+	}
+	button[disabled] {
+		background:  lightgrey;
+	}
+	input[name=date] {
+		appearance: none;
+		--webkit-appearance: none;
+		border: 0;
+		font-size: var(--font-size-default);
+		letter-spacing: var(--letter-spacing);
+		line-height: var(--line-height);
+		padding: var(--spacing-small) 0;
+		background: none;
+		width: 100%;
+		margin-bottom: var(--spacing-small);
+	}
 </style>
 
 <form
@@ -72,15 +96,12 @@
 	action="/api/journal"
 	on:submit|preventDefault={ handleSubmit }>
 
-	<label
-		class:a11y-sr-only="{ editing }"
-		on:click={ handleClick }>{ readableDate }</label>
 	<input
 		type="date"
 		id="date"
 		form="theform"
 		name="date"
-		class:a11y-sr-only="{ !editing }"
+
 		bind:value={ $date }
 		bind:this={ inputElement }
 		on:blur={ handleBlur }>
@@ -88,7 +109,9 @@
 	<Textarea
 		bind:content={ $entry } />
 
-	<button>
+	<button
+		disabled={ disabled }>
+		<Icon name="check" />
 		Save
 	</button>
 </form>
