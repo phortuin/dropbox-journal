@@ -1,6 +1,6 @@
 <script>
 	import router from './router.js'
-	import Header from './header.svelte'
+	import Menu from './menu/menu.svelte'
 	import Route from './route.svelte'
 	import Editor from './editor.svelte'
 	import Login from './login.svelte'
@@ -10,7 +10,7 @@
 	router.start()
 </script>
 
-<Header />
+<Menu />
 <Route path="/" component={ Editor } />
 <Route path="/login" component={ Login } />
 <Route path="/settings" component={ Settings } />
