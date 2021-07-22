@@ -9,7 +9,6 @@
 			const status = response.status
 			if (status !== 200) {
 				if (status === 409 || status === 400) {
-					alert('File location not found')
 					router.redirect('/settings')
 				}
 				if (status === 403) {
@@ -23,7 +22,16 @@
 </script>
 
 <style>
-
+	article {
+		margin-left: calc(-1 * var(--spacing-default));
+		margin-right: calc(-1 * var(--spacing-default));
+		padding: var(--spacing-default);
+		padding-bottom: var(--spacing-wide);
+		letter-spacing: var(--letter-spacing);
+		background: whitesmoke;
+		min-height: 100vh;
+		word-break: break-word;
+	}
 </style>
 
 <article>
