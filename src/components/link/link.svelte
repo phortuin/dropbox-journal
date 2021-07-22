@@ -14,6 +14,12 @@
 	}
 </script>
 
+<a
+	href={href}
+	on:click|preventDefault={ handleAnchorClick }>
+	<slot />
+</a>
+
 <style>
 	a {
 		display: flex;
@@ -22,9 +28,3 @@
 		text-decoration: none;
 	}
 </style>
-
-<a
-	href={href}
-	on:click|preventDefault={ handleAnchorClick }>
-	<slot />
-</a>
