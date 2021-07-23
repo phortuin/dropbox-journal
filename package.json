@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "dropbox": "^4.0.30",
-    "js-cookie": "^2.2.1",
     "node-fetch": "^2.6.0",
     "redis": "^3.1.2"
   },

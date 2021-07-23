@@ -1,5 +1,4 @@
 import { activeRoute } from './stores.js'
-import Cookies from 'js-cookie'
 
 function start() {
 	activeRoute.set(window.location.pathname)
