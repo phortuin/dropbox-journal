@@ -1,24 +1,9 @@
 <script>
-	import { onMount } from 'svelte'
-	import router from './router.js'
+	import { journal } from './stores.js'
 
-	export let journal = 'Loading journal...'
+	journal.read()
 
-	onMount(async () => {
-		journal = await fetch(`/api/journal`).then(response => {
-			const status = response.status
-			if (status !== 200) {
-				if (status === 409 || status === 400) {
-					router.redirect('/settings')
-				}
-				if (status === 403) {
-					router.redirect('/login')
-				}
-			}
-			return response.text()
-		})
-		journal = journal.replace(/\n/g, `<br>`)
-	})
+	$: journalHtml = $journal.replace(/\n/g, '<br>')
 </script>
 
 <style>
@@ -28,12 +13,12 @@
 		padding: var(--spacing-default);
 		padding-bottom: var(--spacing-wide);
 		letter-spacing: var(--letter-spacing);
-		background: whitesmoke;
+		background: var(--color-whitesmoke);
 		min-height: 100vh;
 		word-break: break-word;
 	}
 </style>
 
 <article>
-	{@html journal }
+	{@html journalHtml}
 </article>
